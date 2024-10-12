@@ -20,7 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::post('/agg', [OrdineController::class, 'insert'])->name('insert');
-Route::post('/view/{id}', [OrdineController::class, 'mostra_cartella'])->name('mostra_cartella');
+Route::get('/view/{id}', [OrdineController::class, 'mostra_cartella'])->name('mostra_cartella');
 
 
 require __DIR__.'/auth.php';
+
+//https://tutsmake.com/laravel-crud-and-image-upload-tutorial-example/

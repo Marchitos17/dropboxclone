@@ -11,6 +11,7 @@ class Ordine extends Model
 
     protected $fillable = [
         'foto1',
+        'foto2',
         'numero_ordine',
         'fotografo',
     ];

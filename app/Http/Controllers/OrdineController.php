@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 class OrdineController extends Controller
 {
     public function insert(Request $request){
+        $imageName = $request->file('foto1')->getClientOriginalName();
+        $request->file('foto1')->storeAs('public/immagini', $imageName);
+
+        $imageName2 = $request->file('foto2')->getClientOriginalName();
+        $request->file('foto2')->storeAs('public/immagini', $imageName2);
+        
+        
+
         $data = New Ordine();
         $data->numero_ordine = $request->ordine;
-        $foto = $request->foto1;
+        $data->foto1 = $imageName;
+        $data->foto2 = $imageName2;
+        /*$foto = $request->foto1;
         if($foto){
             $imagename=time().'.'.$foto->getClientOriginalExtension();
             $request->foto1->move('immagini',$imagename);
@@ -39,7 +49,7 @@ class OrdineController extends Controller
             $imagename=time().'.'.$foto5->getClientOriginalExtension();
             $request->foto5->move('immagini',$imagename);
             $data->foto5=$imagename;
-        }
+        }*/
         $data->save();
     
         return redirect()->back();

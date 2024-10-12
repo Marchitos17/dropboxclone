@@ -11,16 +11,8 @@ class Ordine extends Model
 
     protected $fillable = [
         'foto1',
-        'foto2',
-        'foto3',
-        'foto4',
-        'foto5',
-        'foto6',
-        'foto7',
-        'foto8',
-        'foto9',
-        'foto10',
         'numero_ordine',
         'fotografo',
     ];
+
 }

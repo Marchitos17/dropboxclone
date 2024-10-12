@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrdineController;
+use App\Models\Ordine;
 
 Route::get('/', function () {
-    return view('index');
+     $data = Ordine::all();
+    return view('index',compact('data'));
 });
 
 Route::get('/dashboard', function () {
@@ -16,5 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::post('/agg', [OrdineController::class, 'insert'])->name('insert');
+Route::post('/view/{id}', [OrdineController::class, 'mostra_cartella'])->name('mostra_cartella');
+
 
 require __DIR__.'/auth.php';

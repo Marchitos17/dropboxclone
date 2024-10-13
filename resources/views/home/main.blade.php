@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Dashboard</h1>
   </div>
-  <center><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="immagini/img.jpg" alt="" style="width: 100px; height:100px;"></a></center>
+  <center><a class="btn-primary"data-bs-toggle="modal" href="#exampleModalToggle" ><img src="immagini/img.jpg" alt="" style="width: 100px; height:100px;"></a></center>
 
   <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel " aria-hidden="true">
     <div class="modal-dialog">
@@ -46,7 +46,7 @@
         </div>
         <div class="modal-body">
           <p>Numero Ordine</p>
-          <p><input type="text" name="ordine"></p>
+          <p><input type="text" name="ordine" required></p>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Salva</button>
@@ -64,7 +64,7 @@
         </div>
         <div class="modal-body">
           <p>Foto1</p>
-          <p><input type="file" name="foto1" multiple></p>
+          <p><input type="file" name="foto1"></p>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Salva</button>
@@ -136,11 +136,11 @@
         <div class="modal-body">
           <p>Foto4</p>
           <p><input type="file" name="foto4"></p>
-          <p><h4>Vuoi inserire altre foto?</h4></p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle7" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button>
-          <button type="submit" class="btn btn-success">No</button>
+        <div class="modal-footer d-flex">
+            <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
+            <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle7" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
+            <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
         </div>
       </div>
     </div>
@@ -155,12 +155,71 @@
         <div class="modal-body">
           <p>Foto5</p>
           <p><input type="file" name="foto5"></p>
-          <p><h4>Vuoi inserire altre foto?</h4></p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button>
-          <button type="submit" class="btn btn-success">No</button>
+        <div class="modal-footer d-flex">
+          <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
+          <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
+          <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalToggle8" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <p>Foto6</p>
+          <p><input type="file" name="foto6"></p>
+        </div>
+        <div class="modal-footer d-flex">
+            <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
+            <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle9" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
+            <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalToggle9" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Foto7</p>
+          <p><input type="file" name="foto7"></p>
+        </div>
+        <div class="modal-footer d-flex">
+            <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
+            <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle10" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
+            <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Foto8</p>
+          <p><input type="file" name="foto8"></p>
+          <p>Foto9</p>
+          <p><input type="file" name="foto9"></p>
+          <p>Foto10</p>
+          <p><input type="file" name="foto10"></p>
+        </div>
+        <div class="modal-footer ">
+          <button type="submit" class="btn btn-success">Salva</button>
+      </div>
       </div>
     </div>
   </div>
@@ -169,8 +228,7 @@
 
 
 
-  <!--bottone-->
-  <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
+  
 
 
 
@@ -218,7 +276,7 @@
             </td>                
             <td>{{$dataa->created_at}}</td>
             <td>text</td>
-            <td><i class="bi bi-trash" style="color: red;"></i></td>
+            <td><a href="{{route('svuota_cartella',$dataa->id)}}"><i class="bi bi-trash" style="color: red;"></i></a></td>
           </tr>
         @endforeach
       </tbody>

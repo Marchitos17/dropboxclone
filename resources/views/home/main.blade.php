@@ -4,236 +4,23 @@
   </div>
   <center><a class="btn-primary"data-bs-toggle="modal" href="#exampleModalToggle" ><img src="immagini/img.jpg" alt="" style="width: 100px; height:100px;"></a></center>
 
-  <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel " aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Crea cartella</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="{{route('insert')}}" method="POST" enctype="multipart/form-data">
-          @csrf
-          <div class="modal-body">
-            <p>Inserisci il numero dell'ordine : <input type="text" name="ordine"></p>
-            <p>Foto 1:  <input type="file" name="foto1"></p>
-              <p>Foto 2:  <input type="file" name="foto2"></p>
-                <p>Foto 3:  <input type="file" name="foto3"></p>
-                  <p>Foto 4:  <input type="file" name="foto4"></p>
-                    <p>Foto 5:  <input type="file" name="foto5"></p>
-                      <p>Foto 6:  <input type="file" name="foto6"></p>
-                        <p>Foto 7:  <input type="file" name="foto7"></p>
-                          <p>Foto 8:  <input type="file" name="foto8"></p>
-                            <p>Foto 9:  <input type="file" name="foto9"></p>
-                              <p>Foto 10:  <input type="file" name="foto10"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Aggiungi</button>
-          </div>
-        </form>
-      </div>
+<form action="{{route('store')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @if($errors->any())
+      <ul class="alert alert-warning">
+        @foreach ($errors->all() as $error)
+          <li>{{$error}}</li>
+        @endforeach
+      </ul>
+    @endif
+    <p>Ordine numero: <input type="text" name="numero_ordine"></p>
+    <p>Inserisci delle immagini:</p>
+    <p><input type="file" name="images[]" multiple class="form-control"></p>
+    <div class="mb-3">
+      <button type="submit">Inserisci</button>
     </div>
-  </div>-->
-
-<form action="{{route('insert')}}" method="POST" enctype="multipart/form-data">
-  @csrf
-  <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Numero Ordine</p>
-          <p><input type="text" name="ordine" required></p>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Salva</button>
-          <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Successivo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto1</p>
-          <p><input type="file" name="foto1"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Salva</button>
-          <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal">Successivo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto2</p>
-          <p><input type="file" name="foto2"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Salva</button>
-          <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle4" data-bs-toggle="modal" data-bs-dismiss="modal">Successivo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto3</p>
-          <p><input type="file" name="foto3"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Salva</button>
-          <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle5" data-bs-toggle="modal" data-bs-dismiss="modal">Successivo</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Vuoi inserire altre foto?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle6" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button>
-          <button type="submit" class="btn btn-success">No</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle6" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto4</p>
-          <p><input type="file" name="foto4"></p>
-        </div>
-        <div class="modal-footer d-flex">
-            <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
-            <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle7" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
-            <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle7" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto5</p>
-          <p><input type="file" name="foto5"></p>
-        </div>
-        <div class="modal-footer d-flex">
-          <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
-          <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
-          <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle8" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto6</p>
-          <p><input type="file" name="foto6"></p>
-        </div>
-        <div class="modal-footer d-flex">
-            <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
-            <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle9" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
-            <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle9" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto7</p>
-          <p><input type="file" name="foto7"></p>
-        </div>
-        <div class="modal-footer d-flex">
-            <div class="p-2 flex-fill"><p><h4 class="">Vuoi inserire altre foto?</h4></p></div>
-            <div class="p-2 flex-fill"><button type="button" class="btn btn-warning" data-bs-target="#exampleModalToggle10" data-bs-toggle="modal" data-bs-dismiss="modal">Si</button></div>
-            <div class="p-2 flex-fill"><button type="submit" class="btn btn-success">No</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Foto8</p>
-          <p><input type="file" name="foto8"></p>
-          <p>Foto9</p>
-          <p><input type="file" name="foto9"></p>
-          <p>Foto10</p>
-          <p><input type="file" name="foto10"></p>
-        </div>
-        <div class="modal-footer ">
-          <button type="submit" class="btn btn-success">Salva</button>
-      </div>
-      </div>
-    </div>
-  </div>
-
+    
 </form>
-
-
-
-  
-
-
-
-
-
 
   <div class="table-responsive small text-center ">
     <table class="table table-striped table-sm table-hover">
@@ -250,33 +37,15 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($data as $dataa)
+        @foreach ($ordine as $ordinee)
           <tr>
             <td>
-                <a href="{{route('mostra_cartella',$dataa->id)}}"><i class="bi bi-eye-fill"></i></a>
+                <a href="{{route('mostra_cartella',$ordinee->numero_ordine)}}"><i class="bi bi-eye-fill"></i></a>
             </td>
-            <td>{{$dataa->numero_ordine}}</td>
-            <!--<td>
-              <a target="_blank" href="immagini/{{$dataa->foto1}}">
-                <img src="immagini/{{$dataa->foto1}}"style="width:150px">
-              </a>
-              <p class=""><a href="immagini/{{$dataa->foto1}}" download><i class="bi bi-cloud-arrow-down-fill"></i></a></p>
-            </td>
-            <td>
-              <a target="_blank" href="immagini/{{$dataa->foto2}}">
-                <img src="immagini/{{$dataa->foto2}}"style="width:150px">
-              </a>
-              <p class=""><a href="immagini/{{$dataa->foto2}}" download><i class="bi bi-cloud-arrow-down-fill"></i></a></p>
-            </td>
-            <td>
-              <a target="_blank" href="immagini/{{$dataa->foto3}}">
-                <img src="immagini/{{$dataa->foto3}}"style="width:150px">
-              </a>
-              <p class=""><a href="immagini/{{$dataa->foto3}}" download><i class="bi bi-cloud-arrow-down-fill"></i></a></p>-->
-            </td>                
-            <td>{{$dataa->created_at}}</td>
+            <td>{{$ordinee->numero_ordine}}</td>   
+            <td>{{$ordinee->created_at}}</td>
             <td>text</td>
-            <td><a href="{{route('svuota_cartella',$dataa->id)}}"><i class="bi bi-trash" style="color: red;"></i></a></td>
+            <td><a href="{{route('svuota_cartella',$ordinee->id)}}"><i class="bi bi-trash" style="color: red;"></i></a></td>
           </tr>
         @endforeach
       </tbody>

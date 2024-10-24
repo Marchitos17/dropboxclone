@@ -23,5 +23,7 @@ class Ordine extends Model
         'numero_ordine',
         'fotografo',
     ];
-
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 }

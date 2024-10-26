@@ -10,30 +10,32 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Ordine {{$data->ordine->numero_ordine}}</h1>
+            <h1 class="h2">Ordine {{$folder->name}}</h1>
           </div>
           <div class="table-responsive small text-center ">
             <table class="table table-striped table-sm table-hover">
               <thead>
                 <tr>
                   <th scope="col">Foto</th>
-                  <th scope="col">Creata il</th>
-                  <th scope="col">Inserita da</th>
+                  <th scope="col">Inserita il</th>
                   <th scope="col">elimina</th>
                 </tr>
               </thead>
               <tbody>
                   <tr>
                     <td>
-                        @foreach($data as $dataa)
-                          <img src="immagini/{{($dataa->image->image)}}" alt="" style="width: 100px; height:100px;">
-                        @endforeach
+                      @forelse ($folder->files as $file)
+                      <li>
+                        <a href="{{ asset($file->path) }}" target="_blank"><img src="{{ asset($file->path) }}" target="_blank" alt="" style="width: 200px; height:200px;"></a>
+                      </li>
+                      @empty
+                          <li>Nessun file</li>
+                      @endforelse
                       </a>
                     </td>
-                    <td>{{$data->created_at}}</td>
-                    <td></td>
+                    <td>{{$folder->created_at}}</td>
                     <td>
-                      <a href="{{route('cancella_img',$data->foto1)}}"><i class="bi bi-trash" style="color: red;"></i></a></td>
+                      <a href=""><i class="bi bi-trash" style="color: red;"></i></a></td>
                   </tr>
               </tbody>
             </table>

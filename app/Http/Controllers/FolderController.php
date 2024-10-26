@@ -45,7 +45,7 @@ class FolderController extends Controller
             ]);
         }
 
-        return redirect()->route('view.folders')->with('success', 'Cartella e file creati con successo');
+        return redirect()->back();
     }
 
     // Visualizza le cartelle e i file contenuti
@@ -53,5 +53,14 @@ class FolderController extends Controller
     {
         $folders = Folder::with('files')->get();
         return view('home.lista_ordini', compact('folders'));
+    }
+    public function mostra_cartella($id){
+        $folder = Folder::with('files')->findOrFail($id);
+        return view('home.mostra_cartella',compact('folder'));
+    }
+    public function cancella_cartella($id){
+        $folder = Folder::with('files')->findOrFail($id);
+        $folder->delete();
+        return redirect()->back();
     }
 }

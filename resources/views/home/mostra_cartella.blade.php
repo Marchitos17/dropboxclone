@@ -10,7 +10,7 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Ordine {{$data->numero_ordine}}</h1>
+            <h1 class="h2">Ordine {{$data->ordine->numero_ordine}}</h1>
           </div>
           <div class="table-responsive small text-center ">
             <table class="table table-striped table-sm table-hover">
@@ -26,7 +26,7 @@
                   <tr>
                     <td>
                         @foreach($data as $dataa)
-                          <img src="immagini/{{($dataa->image)}}" alt="" style="width: 100px; height:100px;">
+                          <img src="immagini/{{($dataa->image->image)}}" alt="" style="width: 100px; height:100px;">
                         @endforeach
                       </a>
                     </td>
@@ -41,6 +41,8 @@
         </main>
       </div>
     </div>
+
+
   </body>
 @include('home.footer')
 </html>

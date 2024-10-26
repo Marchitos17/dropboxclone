@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ordines', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_ordine')->nullable();
-            $table->string('fotografo')->nullable();
+            $table->string('name'); // Nome del file
+            $table->string('path'); // Percorso del file
+            $table->foreignId('folder_id')->constrained()->onDelete('cascade'); // Relazione con la cartella
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ordines');
+        Schema::dropIfExists('files');
     }
 };

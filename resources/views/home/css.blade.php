@@ -5,29 +5,205 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Dashboard Template · Bootstrap v5.3</title>
-
-    <link  href="https://getbootstrap.com/docs/5.3/examples/dashboard/" rel="canonical">
-
-    
-
-    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Drive - Visualizzazione Avanzata</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <!-- Favicons -->
-    <link href="/img/favicons/apple-touch-icon.png" rel="apple-touch-icon"  sizes="180x180">
-    <link  href="/img/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
-    <link  href="/img/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
-    <link rel="manifest" href="img/favicons/manifest.json">
-    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link  href="img/favicons/favicon.ico" rel="icon" >
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="theme-color" content="#712cf9">
 
     <style>
+      /* Stili di base */
+      body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Intestazione */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            color: #1a73e8;
+        }
+
+        .header-center {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #1a73e8;
+            outline: none;
+        }
+
+        .header-right .icon-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        /* Layout della pagina */
+        .container1 {
+            display: flex;
+        }
+
+        /* Barra laterale */
+        .sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+        }
+
+        .new-button {
+            display: block;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .new-button:hover {
+            background-color: #155bb5;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .sidebar ul li a:hover {
+            color: #1a73e8;
+        }
+
+        /* Area file */
+        .file-area {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .toolbar-button {
+            background-color: #ffffff;
+            color: #5f6368;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toolbar-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Stile della griglia */
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .file-grid-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .file-grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .file-icon {
+            font-size: 50px; /* Icone di dimensione più grande */
+        }
+
+        /* Stile della lista */
+        .file-list {
+            display: none; /* Inizialmente nascosta */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-list-header {
+            background-color: #f5f5f5;
+            display: flex;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .file-list-header-item {
+            flex: 1;
+            padding: 12px 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .file-list-item {
+            display: flex;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.2s;
+        }
+
+        .file-list-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .file-list-item div {
+            flex: 1;
+            color: #333;
+            font-size: 16px;
+        }
       img {
         border: 1px solid #ddd;
         border-radius: 4px;
@@ -53,74 +229,11 @@
           font-size: 3.5rem;
         }
       }
-
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-
-      .bd-mode-toggle .dropdown-menu .active .bi {
-        display: block !important;
-      }
     </style>
 
     
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+  
   </head>

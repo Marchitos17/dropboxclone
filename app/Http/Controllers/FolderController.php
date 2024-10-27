@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Folder;
+use Log;
 use App\Models\File;
+use App\Models\Folder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FolderController extends Controller
 {
+    public function home(){
+        return view('layouts.app');
+    }
     // Visualizza il modulo per creare una nuova cartella e caricare file
     public function showCreateFolderForm()
     {
-        return view('index');
+        return view('layouts.app');
    }
 
     // Crea la cartella e carica i file
@@ -63,4 +67,39 @@ class FolderController extends Controller
         $folder->delete();
         return redirect()->back();
     }
+    public function elimina_immagine($id){
+        $file = File::findOrFail($id);
+        $file->delete();
+        return redirect()->back();
+    }
+    public function inserisci_file(Request $request)
+    {
+    $request->validate([
+        'files.*' => 'file|max:2048',
+        'folder_id' => 'exists:folders,id',
+    ]);
+
+    $folder = Folder::findOrFail($request->folder_id);
+    $folderPath = public_path('immagini/' . $folder->name);
+
+    if (!file_exists($folderPath)) {
+        mkdir($folderPath, 0755, true);
+    }
+
+    if ($request->hasFile('files')) {
+        foreach ($request->file('files') as $file) {
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move($folderPath, $fileName);
+
+            // Salva il percorso relativo al file nel database
+            File::create([
+                'name' => $file->getClientOriginalName(),
+                'path' => 'immagini/' . $folder->name . '/' . $fileName,
+                'folder_id' => $folder->id,
+            ]);
+        }
+    } 
+    return redirect()->back();
+}
+
 }

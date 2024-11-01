@@ -24,12 +24,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 
 <script>
-    Dropzone.options.imageUpload = {
-        paramName: "files[]", // Il nome del campo per i file deve corrispondere al tuo input
-        maxFilesize: 2, // Dimensione massima del file in MB
-        acceptedFiles: "image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf",
-        addRemoveLinks: true, // Aggiungi link per rimuovere i file
-        uploadMultiple: false,
-        autoProcessQueue: false,
-    };
+    
 </script>

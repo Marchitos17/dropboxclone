@@ -24,7 +24,7 @@ class FolderController extends Controller
         ]);
 
         // Creare la cartella nel database
-        $folder = Folder::firstOrCreate(['name' => $request->folder_name]);
+        $folder = Folder::create(['name' => $request->folder_name]);
 
         // Percorso della cartella all'interno di public
         $folderPath = public_path('immagini/' . $folder->name);

@@ -1,8 +1,4 @@
-@extends('layouts.app')
-<?php
-  use App\Models\Folder;
-  $folders = Folder::with('files')->get();
-?>
+@extends('index')
 
 @section('content')
 <main class="file-area">

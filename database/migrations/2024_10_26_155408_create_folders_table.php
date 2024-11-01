@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('folders', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); // Nome della cartella
+            $table->string('name'); // Nome della cartella
             $table->timestamps();
         });
     }

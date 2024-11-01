@@ -1,29 +1,42 @@
-  <!doctype html>
-<html lang="en" data-bs-theme="auto">
-  @include('home.css')
-  <body>
-    @include('home.header')
-    <div class="container-fluid">
-      @include('home.sidebar')
+@extends('index')
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <h1>Cartelle e File</h1>
-
+@section('content')
+<main class="file-area">
+  <div class="toolbar">
+      <button id="gridViewBtn" class="toolbar-button">Visualizzazione a griglia</button>
+      <button id="listViewBtn" class="toolbar-button">Visualizzazione a elenco</button>
+  </div>
+  <h1 class="text-center mb-5">Cartelle e File</h1>
+  <div id="fileGrid" class="file-grid">
     @foreach ($folders as $folder)
-        <h2>Cartella: {{ $folder->name }}</h2>
-        <ul>
-            @forelse ($folder->files as $file)
-                <li>
-                  <a href="{{ asset($file->path) }}" target="_blank">Visualizza</a>
-                </li>
-              @empty
-                  <li>Nessun file</li>
-              @endforelse
-        </ul>
-    @endforeach
-        </main>
+      <div class="file-grid-item">
+        <a href="{{route('mostra_cartella',$folder->id)}}" class="text-decoration-none">
+          <div class="file-icon">📁</div>
+          <div>Ordine: {{ $folder->name }}</div>
+        </a>
       </div>
-    </div>
-  </body>
-@include('home.footer')
-</html>
+    @endforeach
+      <!--<div class="file-grid-item">
+          <div class="file-icon">📄</div>
+          <div>Appunti.txt</div>
+      </div>-->
+  </div>
+  <div id="fileList" class="file-list">
+      <div class="file-list-header">
+          <div class="file-list-header-item">Nome</div>
+          <div class="file-list-header-item">Ultima modifica</div>
+          <div class="file-list-header-item">Dimensione</div>
+      </div>
+      @foreach ($folders as $folder)
+      <a href="{{route('mostra_cartella',$folder->id)}}" class="text-decoration-none">
+        <div class="file-list-item">
+          <div class="file-item">{{ $folder->name }}</div>
+            <div class="file-item">10/10/2024</div>
+            <div class="file-item">—</div>
+        </div>
+      </a>
+      @endforeach
+  </div>
+</main>
+
+@endsection

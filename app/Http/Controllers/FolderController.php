@@ -11,20 +11,16 @@ use Illuminate\Support\Facades\Storage;
 class FolderController extends Controller
 {
     public function home(){
-        return view('layouts.app');
+        return view('home.main');
     }
-    // Visualizza il modulo per creare una nuova cartella e caricare file
-    public function showCreateFolderForm()
-    {
-        return view('layouts.app');
-   }
+
 
     // Crea la cartella e carica i file
     public function createFolder(Request $request)
     {
         $request->validate([
-            'folder_name' => 'required|string|max:255',
-            'files.*' => 'required|file|max:2048',
+            'folder_name' => 'string|max:255',
+            'files.*' => 'file|max:2048',
         ]);
 
         // Creare la cartella nel database

@@ -19,12 +19,12 @@ class FolderController extends Controller
     public function createFolder(Request $request)
     {
         $request->validate([
-            'folder_name' => 'string|max:255',
+            'folder_name' => 'required|string|max:255',
             'files.*' => 'file|max:2048',
         ]);
 
         // Creare la cartella nel database
-        $folder = Folder::create(['name' => $request->folder_name]);
+        $folder = Folder::firstOrCreate(['name' => $request->folder_name]);
 
         // Percorso della cartella all'interno di public
         $folderPath = public_path('immagini/' . $folder->name);
@@ -32,6 +32,8 @@ class FolderController extends Controller
             mkdir($folderPath, 0777, true);
         }
 
+        // Verifica se ci sono file da caricare
+        if ($request->hasFile('files')) {
         // Salva ogni file nella cartella pubblica e nel database
         foreach ($request->file('files') as $file) {
             $fileName = time() . '_' . $file->getClientOriginalName();
@@ -43,8 +45,8 @@ class FolderController extends Controller
                 'path' => 'immagini/' . $folder->name . '/' . $fileName,
                 'folder_id' => $folder->id,
             ]);
+            }
         }
-
         return redirect()->back();
     }
 

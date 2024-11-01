@@ -13,15 +13,17 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('create.folder') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
+          <form action="{{ route('create.folder',) }}" method="post" enctype="multipart/form-data" id="image-upload">
             @csrf
             <div class="mb-3">
               <label for="folderName" class="form-label">Nome della Cartella</label>
               <input type="text" name="folder_name" id="folderName" class="form-control" required>
             </div>
-            <div class="dz-message">Trascina i file qui o clicca per selezionarli.</div>
-            <!-- Aggiunge la cattura della fotocamera e la selezione dei file -->
-            <input type="file" name="files[]" multiple>
+            <div class="mb-3">
+              <label for="files" class="form-label">Seleziona i file</label>
+              <input type="file" id="files" name="files[]" multiple accept=".jpg,.jpeg,.png,.gif,.pdf" class="form-control" onchange="previewFiles()">
+              <div id="file-previews" class="mt-2"></div>
+          </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -44,3 +46,20 @@
       <li><a href="#">🗑️ Cestino</a></li>
   </ul>
 </aside>
+<script>
+  function previewFiles() {
+      const fileList = document.getElementById('file-previews');
+      fileList.innerHTML = '';
+      const files = document.getElementById('files').files;
+  
+      Array.from(files).forEach(file => {
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file); // Crea un URL per l'anteprima
+        img.width = 100; // Imposta la larghezza desiderata per l'anteprima
+        img.height = 100; // Imposta l'altezza desiderata per l'anteprima
+        div.appendChild(img);
+        fileList.appendChild(div);
+      });
+  }
+  </script>

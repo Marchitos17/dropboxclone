@@ -40,19 +40,17 @@
               <input type="file" name="files[]" id="fileElem" multiple accept="image/*" style="display:none;">
             </div>
           <div id="image-previews" class="mt-2"></div>
-          </form>
+        </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-            <button type="submit" class="btn btn-primary" form="image-upload">Salva</button>
+            <button type="submit" class="btn btn-primary" form="image-upload" id="submit-button">Salva</button>
         </div>
       </div>
     </div>
   </div>
 
-
   <!------>
-
 
   <ul>
       <li><a href="{{route('home')}}" >📁 Il mio Drive</a></li>
@@ -63,110 +61,123 @@
   </ul>
 </aside>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-const dropArea = document.getElementById('drop-area');
-const fileInput = document.getElementById('fileElem');
-const previewContainer = document.getElementById('image-previews');
-let formData = new FormData(); // Crea un oggetto FormData vuoto
-let isUploading = false; // Flag per prevenire invii multipli
-
-// Funzione per prevenire il comportamento predefinito
-const preventDefault = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-};
-
-// Aggiungi i listener per gli eventi drag and drop
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefault, false);
-    document.body.addEventListener(eventName, preventDefault, false);
-});
-
-dropArea.addEventListener('dragenter', () => {
-    dropArea.classList.add('hover'); // Aggiunge la classe hover
-});
-
-dropArea.addEventListener('dragleave', () => {
-    dropArea.classList.remove('hover'); // Rimuove la classe hover
-});
-
-dropArea.addEventListener('drop', (event) => {
-    dropArea.classList.remove('hover'); // Rimuove la classe hover
-    const files = event.dataTransfer.files; // Ottieni i file dal drop
-    handleFiles(files); // Gestisci i file
-});
-
-// Cliccando sulla zona di drop, attiva l'input file
-dropArea.addEventListener('click', () => {
-    fileInput.click(); // Apri il file input
-});
-
-// Gestisci i file selezionati
-fileInput.addEventListener('change', () => {
-    const files = fileInput.files; // Ottieni i file selezionati
-    handleFiles(files); // Gestisci i file
-});
-
-// Funzione per gestire i file e mostrare l'anteprima
-function handleFiles(files) {
-    for (const file of files) {
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file); // Crea un URL per l'anteprima
-        img.width = 100; // Imposta la larghezza desiderata
-        img.height = 100; // Imposta l'altezza desiderata
-        
-        const div = document.createElement('div');
-        div.appendChild(img); // Aggiunge l'immagine al div
-        previewContainer.appendChild(div); // Aggiunge il div al contenitore di anteprima
-
-        formData.append('files[]', file); // Aggiunge il file al FormData
-    }
-}
-
-// Aggiungi un evento al pulsante "Salva" per inviare i file al server
-document.getElementById('save-button').addEventListener('click', () => {
-    const folderName = document.getElementById('folderName').value;
-
-    // Assicurati che ci sia almeno un file da caricare
-    if (formData.has('files[]') && folderName) {
-        formData.append('folder_name', folderName); // Aggiungi il nome della cartella al FormData
-
-        if (!isUploading) { // Se non stai già caricando
-            isUploading = true; // Imposta il flag di upload
-            uploadFiles(formData); // Invia i file al server
-        }
-    } else {
-        alert('Aggiungi almeno un file e un nome per la cartella.');
-    }
-});
-
-// Funzione per inviare i file al server
-function uploadFiles(formData) {
-    fetch("{{ route('create.folder') }}", {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Includi il token CSRF
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data); // Mostra i dati di successo
-        $('#exampleModal').modal('hide'); // Chiudi la modale dopo il caricamento
-        formData = new FormData(); // Resetta l'oggetto FormData dopo il caricamento
-        previewContainer.innerHTML = ''; // Resetta l'anteprima
-        isUploading = false; // Resetta il flag di upload
-    })
-    .catch((error) => {
-        console.error('Error:', error); // Mostra eventuali errori
-        isUploading = false; // Resetta il flag di upload in caso di errore
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('fileElem');
+    const previewContainer = document.getElementById('image-previews');
+    let isUploading = false;
+  
+    // Prevenire il comportamento predefinito
+    const preventDefault = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+    };
+  
+    // Eventi drag and drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefault, false);
+        document.body.addEventListener(eventName, preventDefault, false);
     });
-}
-
-
-</script>
+  
+    dropArea.addEventListener('dragenter', () => {
+        dropArea.classList.add('hover');
+    });
+  
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('hover');
+    });
+  
+    dropArea.addEventListener('drop', (event) => {
+        dropArea.classList.remove('hover');
+        const files = event.dataTransfer.files;
+        handleFiles(files);
+    });
+  
+    // Clic input file
+    dropArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+  
+    // Evento `change` per il fileInput
+    fileInput.addEventListener('change', () => {
+        const files = fileInput.files;
+        handleFiles(files);
+    });
+  
+    // Funzione gestione file e anteprima
+    function handleFiles(files) {
+        if (isUploading) return; // Evita duplicazioni
+        const folderName = document.getElementById('folderName').value;
+  
+        if (!folderName) {
+            alert('Inserisci un nome per la cartella.');
+            return;
+        }
+  
+        previewContainer.innerHTML = '';
+        for (const file of files) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.width = 100;
+            img.height = 100;
+  
+            const div = document.createElement('div');
+            div.appendChild(img);
+            previewContainer.appendChild(div);
+        }
+  
+        // Chiama la funzione per caricare i file
+        uploadFiles(files);
+    }
+  
+    // Funzione invio file al server
+    function uploadFiles(files) {
+        const formData = new FormData();
+        const folderName = document.getElementById('folderName').value;
+  
+        formData.append('folder_name', folderName);
+        for (const file of files) {
+            formData.append('files[]', file);
+        }
+  
+        isUploading = true; // Imposta isUploading a true
+  
+        fetch("{{ route('create.folder') }}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            previewContainer.innerHTML = ''; // Pulisci l'anteprima
+  
+            // Chiudi il modal
+            $('#exampleModal').modal('hide');
+  
+            isUploading = false; // Imposta isUploading a false
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            isUploading = false; // Imposta isUploading a false
+        });
+    }
+  
+    // Aggiungi evento per gestire l'invio del modulo
+    document.getElementById('image-upload').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previeni l'invio predefinito del modulo
+        const formData = new FormData(this); // Crea FormData dal modulo
+        uploadFiles(formData); // Passa FormData alla funzione uploadFiles
+    });
+  </script>
+  

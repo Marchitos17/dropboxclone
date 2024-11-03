@@ -13,4 +13,4 @@ Route::get('/delete/{id}', [FolderController::class, 'cancella_cartella'])->name
 Route::get('/delete/{id}/ph', [FolderController::class, 'elimina_immagine'])->name('elimina_immagine');
 Route::post('/insert/{id}/file', [FolderController::class, 'inserisci_file'])->name('inserisci_file');
 
-//crea 4 cartelle con 4 foto
+//non vanno i file trascinati

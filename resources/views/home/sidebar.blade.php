@@ -69,6 +69,7 @@
     const fileInput = document.getElementById('fileElem');
     const previewContainer = document.getElementById('image-previews');
     let isUploading = false;
+    let filesToUpload = []; // Array per mantenere i file da caricare
   
     // Prevenire il comportamento predefinito
     const preventDefault = (event) => {
@@ -117,8 +118,13 @@
             return;
         }
   
-        previewContainer.innerHTML = '';
+        // Aggiungi i file selezionati (trascinati o cliccati) all'array filesToUpload
         for (const file of files) {
+            filesToUpload.push(file);
+        }
+  
+        previewContainer.innerHTML = '';
+        for (const file of filesToUpload) {
             const img = document.createElement('img');
             img.src = URL.createObjectURL(file);
             img.width = 100;
@@ -128,20 +134,24 @@
             div.appendChild(img);
             previewContainer.appendChild(div);
         }
-  
-        // Chiama la funzione per caricare i file
-        uploadFiles(files);
     }
   
     // Funzione invio file al server
-    function uploadFiles(files) {
-        const formData = new FormData();
+    function uploadFiles() {
+        if (filesToUpload.length === 0) {
+            alert("Nessun file selezionato.");
+            return;
+        }
+
+        const formData = new FormData(document.getElementById('image-upload')); // Usa FormData del modulo
         const folderName = document.getElementById('folderName').value;
   
         formData.append('folder_name', folderName);
-        for (const file of files) {
+  
+        // Aggiungi i file all'oggetto FormData
+        filesToUpload.forEach(file => {
             formData.append('files[]', file);
-        }
+        });
   
         isUploading = true; // Imposta isUploading a true
   
@@ -164,8 +174,7 @@
   
             // Chiudi il modal
             $('#exampleModal').modal('hide');
-  
-            isUploading = false; // Imposta isUploading a false
+            window.location.href = '{{ route('condivisi') }}';
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -176,8 +185,6 @@
     // Aggiungi evento per gestire l'invio del modulo
     document.getElementById('image-upload').addEventListener('submit', function(event) {
         event.preventDefault(); // Previeni l'invio predefinito del modulo
-        const formData = new FormData(this); // Crea FormData dal modulo
-        uploadFiles(formData); // Passa FormData alla funzione uploadFiles
+        uploadFiles(); // Passa il FormData per inviare il file
     });
-  </script>
-  
+</script>

@@ -47,7 +47,7 @@ class FolderController extends Controller
             ]);
             }
         }
-        return redirect()->back();
+        return response()->json(['message' => 'Cartella creata e file caricati con successo!']);
     }
 
     // Visualizza le cartelle e i file contenuti

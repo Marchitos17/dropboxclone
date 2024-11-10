@@ -29,14 +29,13 @@
           <div class="file-list-header-item">Elimina</div>
       </div>
       @foreach ($folders as $folder)
-      <a href="{{route('mostra_cartella',$folder->id)}}" class="text-decoration-none">
+      
         <div class="file-list-item">
-            <div class="file-item">📂 {{ $folder->name }}</div>
-            <div class="file-item">10/10/2024</div>
+          <div class="file-item"><a href="{{route('mostra_cartella',$folder->id)}}" class="text-decoration-none">📂 {{ $folder->name }}</a></div>
+            <div class="file-item ">{{$folder->created_at}}</div>
             <div class="file-item">—</div>
-            <div class="file-item"><a href="" style="color:red"><i class="bi bi-trash3-fill"></i></a></div>
+            <div class="file-item "><a href="{{route('cancella_cartella',$folder->id)}}" style="color:red"><i class="bi bi-trash3-fill "></i></a></div>
         </div>
-      </a>
       @endforeach
   </div>
 </main>

@@ -60,6 +60,5 @@
           <div class="file-item">12 KB</div>
       </div>
   </div>
-</main>
-
+</main>  
 @endsection

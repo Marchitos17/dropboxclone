@@ -35,6 +35,7 @@
   <div id="fileGrid" class="file-grid">
     @forelse($folder->files as $file)
       <div class="file-grid-item">
+        <!---Controllo immagine-->
         @php
             // Estensioni supportate
             $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
@@ -59,13 +60,11 @@
               <a href="{{ asset($file->path) }}" target="_blank"><div class="file-icon"><img src="{{ asset($file->path) }}" target="_blank" alt="" style="width: 200px; height:200px;"></a></div>
           @else
               <!-- Se non è un'immagine, mostriamo un'icona o testo -->
-              
                   <div class="file-icon">
                     <a href="{{ asset($file->path) }}" target="_blank"><img src="https://cdn3d.iconscout.com/3d/premium/thumb/new-file-3d-icon-download-in-png-blend-fbx-gltf-formats--logo-document-add-create-and-folder-pack-files-folders-icons-6648116.png" target="_blank" alt="" style="width: 200px; height:200px;"></a>
                   </div>
-              
           @endif
-          
+          <!---Controllo immagine-->
         </a>
         <div class="d-flex justify-content-evenly mt-3">
           <a href="{{ asset($file->path) }}" download><i class="bi bi-download" style="color:green"></i></a>
@@ -100,23 +99,23 @@
                 }
             }
         @endphp
-
           @if ($isImage)
               <!-- Se è un'immagine, mostriamo l'anteprima -->
-              <a href="{{ asset($file->path) }}" target="_blank">
-                  <img src="{{ asset($file->path) }}" alt="Anteprima immagine" style="width: 200px; height:200px;">
-              </a>
+              <div class="file-item">
+                <a href="{{ asset($file->path) }}" target="_blank">
+                  📷
+                </a>
+              </div>
           @else
               <!-- Se non è un'immagine, mostriamo un'icona o testo -->
-              <a href="{{ asset($file->path) }}" target="_blank">
-                  <div class="file-icon">
+              <div class="file-item">
+                <a href="{{ asset($file->path) }}" target="_blank">
                       <span>📄</span>
-                  </div>
-              </a>
+                </a>
+            </div>
           @endif
-
             <div class="file-item">{{$folder->created_at}}</div>
-            <div class="file-item">—</div>
+            <div class="file-item ">—</div>
             <div class="file-item text-center"><a href="{{route('elimina_immagine',$file->id)}}" style="color:red"><i class="bi bi-trash3-fill"></i></a></div>
         </div>
       </a>

@@ -11,7 +11,7 @@
     @foreach ($folders as $folder)
       <div class="file-grid-item">
         <a href="{{route('mostra_cartella',$folder->id)}}" class="text-decoration-none">
-          <div class="file-icon">📁</div>
+          <div class="file-icon"><img src="https://img.freepik.com/premium-psd/3d-file-folder-check-verify-icon-illustration_148391-981.jpg" alt=""></div>
           <div>Ordine: {{ $folder->name }}</div>
         </a>
       </div>

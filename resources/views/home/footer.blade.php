@@ -24,5 +24,126 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 
 <script>
-    
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('fileElem');
+    const previewContainer = document.getElementById('image-previews');
+    let isUploading = false;
+    let filesToUpload = []; // Array per mantenere i file da caricare
+  
+    // Prevenire il comportamento predefinito
+    const preventDefault = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+    };
+  
+    // Eventi drag and drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefault, false);
+        document.body.addEventListener(eventName, preventDefault, false);
+    });
+  
+    dropArea.addEventListener('dragenter', () => {
+        dropArea.classList.add('hover');
+    });
+  
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('hover');
+    });
+  
+    dropArea.addEventListener('drop', (event) => {
+        dropArea.classList.remove('hover');
+        const files = event.dataTransfer.files;
+        handleFiles(files);
+    });
+  
+    // Clic input file
+    dropArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+  
+    // Evento `change` per il fileInput
+    fileInput.addEventListener('change', () => {
+        const files = fileInput.files;
+        handleFiles(files);
+    });
+  
+    // Funzione gestione file e anteprima
+    function handleFiles(files) {
+        if (isUploading) return; // Evita duplicazioni
+        const folderName = document.getElementById('folderName').value;
+  
+        if (!folderName) {
+            alert('Inserisci un nome per la cartella.');
+            return;
+        }
+  
+        // Aggiungi i file selezionati (trascinati o cliccati) all'array filesToUpload
+        for (const file of files) {
+            filesToUpload.push(file);
+        }
+  
+        previewContainer.innerHTML = '';
+        for (const file of filesToUpload) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.width = 100;
+            img.height = 100;
+  
+            const div = document.createElement('div');
+            div.appendChild(img);
+            previewContainer.appendChild(div);
+        }
+    }
+  
+    // Funzione invio file al server
+    function uploadFiles() {
+        if (filesToUpload.length === 0) {
+            alert("Nessun file selezionato.");
+            return;
+        }
+
+        const formData = new FormData(document.getElementById('image-upload')); // Usa FormData del modulo
+        const folderName = document.getElementById('folderName').value;
+  
+        formData.append('folder_name', folderName);
+  
+        // Aggiungi i file all'oggetto FormData
+        filesToUpload.forEach(file => {
+            formData.append('files[]', file);
+        });
+  
+        isUploading = true; // Imposta isUploading a true
+  
+        fetch("{{ route('create.folder') }}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            previewContainer.innerHTML = ''; // Pulisci l'anteprima
+  
+            // Chiudi il modal
+            $('#exampleModal').modal('hide');
+            window.location.href = '{{ route('condivisi') }}';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            isUploading = false; // Imposta isUploading a false
+        });
+    }
+  
+    // Aggiungi evento per gestire l'invio del modulo
+    document.getElementById('image-upload').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previeni l'invio predefinito del modulo
+        uploadFiles(); // Passa il FormData per inviare il file
+    });
 </script>

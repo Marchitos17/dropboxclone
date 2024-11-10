@@ -11,6 +11,4 @@ Route::get('/view-folders', [FolderController::class, 'viewFolders'])->name('con
 Route::get('/view/{id}/show', [FolderController::class, 'mostra_cartella'])->name('mostra_cartella');
 Route::get('/delete/{id}', [FolderController::class, 'cancella_cartella'])->name('cancella_cartella');
 Route::get('/delete/{id}/ph', [FolderController::class, 'elimina_immagine'])->name('elimina_immagine');
-Route::post('/insert/{id}/file', [FolderController::class, 'inserisci_file'])->name('inserisci_file');
-
-//non vanno i file trascinati
+Route::post('/insert/file', [FolderController::class, 'inserisci_file'])->name('inserisci_file');

@@ -76,9 +76,9 @@
 
         .new-button {
             display: block;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
+            background-color: ;
+            color: black;
+            border: solid 1px black;
             border-radius: 60px;
             padding: 12px;
             width: 100%;
@@ -90,6 +90,7 @@
 
         .new-button:hover {
             background-color: #155bb5;
+            color: white;
         }
 
         .sidebar ul {

@@ -74,7 +74,7 @@ class FolderController extends Controller
     public function inserisci_file(Request $request)
     {
     $request->validate([
-        'files.*' => 'file|max:2048',
+        'files.*' => 'required|file|max:2048',
         'folder_id' => 'exists:folders,id',
     ]);
 

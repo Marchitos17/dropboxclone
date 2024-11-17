@@ -44,19 +44,18 @@
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 /*DROPDOWN TASTO NUOVO*/
-
 </style>
-<aside class="sidebar">
+<aside class="sidebar d-md-block d-none">
   @if (Route::currentRouteName() === 'condivisi')
     <div class="dropdown">
-      <button class="new-button" data-bs-toggle="modal" href="#exampleModal"> <i class="bi bi-cloud-plus-fill"></i> Nuovo</button>
+      <button class="new-button"> <i class="bi bi-cloud-plus-fill"></i> Nuovo</button>
       <div class="dropdown-content" style="left:0;">
         <a none><button type="button" class="btn" data-bs-toggle="modal" href="#exampleModal">👉 Crea Cartella</button></a>
         <a none><button type="button" class="btn" data-bs-toggle="modal" href="#exampleModal3">👉 Aggiungi File</button></a>
       </div>
     </div>
   @elseif(Route::currentRouteName() === 'mostra_cartella')
-    <button class="new-button" data-bs-toggle="modal" href="#exampleModal"> <i class="bi bi-patch-plus-fill"></i> Aggiungi File</button>
+    <button class="new-button" data-bs-toggle="modal" href="#exampleModal1"> <i class="bi bi-patch-plus-fill"></i> Aggiungi File</button>
     @else
   @endif
   <!--- MODAL 2 SINGOLO FILE-->
@@ -116,8 +115,8 @@
   <!--- l'altro MODAL 2 si trova nella view mostra_cartella-->
 
   <ul>
-      <li><a href="{{route('home')}}" >📁 Il mio Drive</a></li>
-      <li><a href="{{route('condivisi')}}">👥 Condivisi</a></li>
+      <li><a href="{{route('condivisi')}}" >📁 Il mio Drive</a></li>
+      <li><a href="{{route('home')}}">👥 Condivisi</a></li>
       <li><a href="#">⏱️ Recenti</a></li>
       <li><a href="#">🌟 Speciali</a></li>
       <li><a href="#">🗑️ Cestino</a></li>

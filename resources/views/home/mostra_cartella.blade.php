@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('content')
-<!--- MODAL 2-->
+<!--- MODAL 2 usato nel tasto della cartella per inserire un solo file-->
 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -10,7 +10,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('inserisci_file') }}" method="post" enctype="multipart/form-data" id="image-upload1">
+        <form action="{{ route('inserisci_file') }}" method="post" enctype="multipart/form-data" id="image-upload12">
           @csrf
               <input type="text" name="folder_id" value="{{$folder->id}}" hidden>
               <input type="file" name="files[]" multiple>
@@ -18,7 +18,7 @@
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-          <button type="submit" class="btn btn-primary" form="image-upload1">Salva</button>
+          <button type="submit" class="btn btn-primary" form="image-upload12">Salva</button>
       </div>
     </div>
   </div>
@@ -66,6 +66,7 @@
           @endif
           <!---Controllo immagine-->
         </a>
+        <div><h6 class="mt-2 text-truncate">{{$file->name}}</h6></div> <!-- Text troncate, aggiunge i puntini ad un testo che non entra nel div-->
         <div class="d-flex justify-content-evenly mt-3">
           <a href="{{ asset($file->path) }}" download><i class="bi bi-download" style="color:green"></i></a>
           <a href="{{route('elimina_immagine',$file->id)}}" style="color:red"><i class="bi bi-trash3-fill" style="color:red"></i></a>
@@ -115,7 +116,7 @@
             </div>
           @endif
             <div class="file-item">{{$folder->created_at}}</div>
-            <div class="file-item ">—</div>
+            <div class="file-item ">n/a</div>
             <div class="file-item text-center"><a href="{{route('elimina_immagine',$file->id)}}" style="color:red"><i class="bi bi-trash3-fill"></i></a></div>
         </div>
       </a>

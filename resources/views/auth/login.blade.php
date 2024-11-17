@@ -14,13 +14,13 @@
             {{ $value }}
         </div>
     @endsession
-    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5 text-center" style="background-image: url(./immagini/images/slider/slider2.webp); 
+    <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5 text-center" style="background-image: url(https://w0.peakpx.com/wallpaper/486/892/HD-wallpaper-3d-abstract-colorful-shapes-minimalist-3d-abstract-shapes-minimalism-minimalist-colorful.jpg); 
     background-repeat: no-repeat; background-position: center center; background-size: cover; width: 100%;
     height: 100%;"tabindex="-1" role="dialog" id="modalSignin">
         <div class="modal-dialog" role="document">
           <div class="modal-content rounded-4 shadow">
               <div class="flex items-center justify-end mt-4">
-                <a href="{{url('/')}}"><img src="immagini/logo4spina.png" class="" style="width: 150px; border-radius:50%; " alt="logo"></a>
+                <a href="{{url('/')}}"><img src="https://img.freepik.com/premium-photo/vibrant-3d-illustration-folder-icon-representing-organization-data-storage-digital-information_1142-214080.jpg" class="" style="width: 220px; border-radius:50%; " alt="logo"></a>
               </div>
             <h1 class="fw-bold mb-0 fs-2 text-black text-center">Accedi</h1>
       

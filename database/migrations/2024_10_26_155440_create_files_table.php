@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // Nome del file
             $table->string('path'); // Percorso del file
-            $table->foreignId('folder_id')->constrained()->onDelete('cascade'); // Relazione con la cartella
+            $table->foreignId('folder_id')->nullable()->constrained()->onDelete('cascade'); // Relazione con la cartella
             $table->timestamps();
         });
     }

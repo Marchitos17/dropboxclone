@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FolderController;
-require __DIR__.'/auth.php';
+
 Route::get('/', [FolderController::class, 'home'])->name('home');
 
 Route::post('/create', [FolderController::class, 'createFolder'])->name('create.folder');
@@ -12,3 +12,12 @@ Route::get('/view/{id}/show', [FolderController::class, 'mostra_cartella'])->nam
 Route::get('/delete/{id}', [FolderController::class, 'cancella_cartella'])->name('cancella_cartella');
 Route::get('/delete/{id}/ph', [FolderController::class, 'elimina_immagine'])->name('elimina_immagine');
 Route::post('/insert/file', [FolderController::class, 'inserisci_file'])->name('inserisci_file');
+Route::post('/insert', [FolderController::class, 'inserisci_singolo_file'])->name('inserisci_singolo_file');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

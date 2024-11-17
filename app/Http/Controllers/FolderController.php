@@ -54,7 +54,8 @@ class FolderController extends Controller
     public function viewFolders()
     {
         $folders = Folder::with('files')->get();
-        return view('home.lista_ordini', compact('folders'));
+        $files = File::whereNull('folder_id')->get();
+        return view('home.lista_ordini', compact('folders','files'));
     }
     public function mostra_cartella($id){
         $folder = Folder::with('files')->findOrFail($id);
@@ -99,5 +100,34 @@ class FolderController extends Controller
     } 
     return redirect()->back();
 }
+
+public function inserisci_singolo_file(Request $request)
+{
+    // Validazione del file caricato
+    $request->validate([
+        'files.*' => 'required|file|max:2048', // Aggiungi la validazione del file
+    ]);
+
+    // Percorso dove salvare i file
+    $folderPath = public_path('immagini/');
+
+    // Verifica se è stato caricato un file
+    if ($request->hasFile('files')) {
+        foreach ($request->file('files') as $file) {
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move($folderPath, $fileName);
+
+            // Salva il percorso relativo al file nel database
+            File::create([
+                'name' => $file->getClientOriginalName(),
+                'path' => 'immagini/' . $fileName,
+                'folder_id' => null,
+            ]);
+        }
+    } 
+
+    // Se non c'è nessun file, ritorna con errore
+    return redirect()->back();
+    }
 
 }

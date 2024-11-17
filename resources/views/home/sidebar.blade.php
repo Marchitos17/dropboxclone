@@ -14,18 +14,73 @@
     border-color: #0056b3;
     background-color: #f0f0f0;
 }
+/*DROPDOWN TASTO NUOVO*/
+.dropbtn {
+  background-color: #0672d6;
+  color: white;
+  padding: 16px;
+  font-size: 160px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #0567c2;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+/*DROPDOWN TASTO NUOVO*/
 
 </style>
 <aside class="sidebar">
   @if (Route::currentRouteName() === 'condivisi')
-    <button class="btn new-button" data-bs-toggle="modal" href="#exampleModal"> <i class="bi bi-cloud-plus-fill"></i> Nuovo</button>
+    <div class="dropdown">
+      <button class="new-button" data-bs-toggle="modal" href="#exampleModal"> <i class="bi bi-cloud-plus-fill"></i> Nuovo</button>
+      <div class="dropdown-content" style="left:0;">
+        <a none><button type="button" class="btn" data-bs-toggle="modal" href="#exampleModal">👉 Crea Cartella</button></a>
+        <a none><button type="button" class="btn" data-bs-toggle="modal" href="#exampleModal3">👉 Aggiungi File</button></a>
+      </div>
+    </div>
   @elseif(Route::currentRouteName() === 'mostra_cartella')
-    <button class="new-button" data-bs-toggle="modal" href="#exampleModal1"> <i class="bi bi-patch-plus-fill"></i> Aggiungi File</button>
+    <button class="new-button" data-bs-toggle="modal" href="#exampleModal"> <i class="bi bi-patch-plus-fill"></i> Aggiungi File</button>
     @else
   @endif
-
-
-
+  <!--- MODAL 2 SINGOLO FILE-->
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><h2>Support </h2></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('inserisci_singolo_file') }}" method="post" enctype="multipart/form-data" id="image-upload1">
+              @csrf
+                  <input type="file" name="files[]" multiple>
+          </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+              <button type="submit" class="btn btn-primary" form="image-upload1">Salva</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!------>
   <!--MODAL 1-->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

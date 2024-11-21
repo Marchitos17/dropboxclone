@@ -11,7 +11,7 @@
 </style>
 <header>
   <div class="header-left">
-      <h1>Il mio Drive</h1>
+    <h1><a href="{{route('home')}}">Il mio Drive</a></h1>
   </div>
   <div class="header-center">
       <input type="text" placeholder="Cerca nel Drive" class="search-bar">

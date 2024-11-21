@@ -44,6 +44,23 @@
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 /*DROPDOWN TASTO NUOVO*/
+/* Aggiungi questo al tuo file CSS */
+.menu-btn {
+  height: 50px; /* Imposta un'altezza fissa */
+  width: 50px;  /* Imposta una larghezza fissa */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Imposta una dimensione del font per l'icona */
+  margin-left: 5px;
+  background-color: #0672d6; /* Colore di sfondo personalizzato */
+  color: white; /* Colore del testo */
+  border: none; /* Rimuove il bordo */
+}
+
+.menu-btn:hover {
+  background-color: #0567c2; /* Colore di sfondo al passaggio del mouse */
+}
 </style>
 <aside class="sidebar d-md-block d-none">
   @if (Route::currentRouteName() === 'condivisi')
@@ -122,6 +139,28 @@
       <li><a href="#">🗑️ Cestino</a></li>
   </ul>
 </aside>
+<!-- Pulsante per aprire l'Offcanvas (visibile solo su dispositivi mobili) OFFCANVAS PRESENTE NELLA SIDEBAR-->
+<button class="btn menu-btn d-md-none mt-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+  ☰
+</button>
+
+<!-- Offcanvas (pannello laterale) -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul>
+      <li><a href="{{route('condivisi')}}">📁 Il mio Drive</a></li>
+      <li><a href="{{route('home')}}">👥 Condivisi</a></li>
+      <li><a href="#">⏱️ Recenti</a></li>
+      <li><a href="#">🌟 Speciali</a></li>
+      <li><a href="#">🗑️ Cestino</a></li>
+    </ul>
+  </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

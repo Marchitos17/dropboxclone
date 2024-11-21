@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class FolderController extends Controller
 {
     public function home(){
-        return view('home.main');
+        return redirect()->route('condivisi');
     }
 
 

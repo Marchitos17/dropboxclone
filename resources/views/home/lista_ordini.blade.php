@@ -1,6 +1,112 @@
 @extends('index')
 
 @section('content')
+<style>
+ /* Stile generali per la tabella */
+.file-list {
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.file-list-header {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.file-list-header-item {
+  flex: 1;
+}
+
+.file-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+.file-list-item:hover {
+  background-color: #f9f9f9;
+}
+
+.file-item {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.file-item a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.file-item a:hover {
+  color: #0056b3;
+}
+
+.file-item i {
+  color: #dc3545;
+  transition: color 0.3s ease;
+}
+
+.file-item i:hover {
+  color: #c82333;
+}
+
+/* Design per mobile */
+@media (max-width: 767px) {
+  .file-list {
+    display: block;
+  }
+
+  .file-list-header {
+    display: none;
+  }
+
+  .file-list-item {
+    display: block;
+    margin-bottom: 12px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+  }
+
+  .file-item {
+    display: block;
+    margin-bottom: 8px;
+    padding-left: 0;
+  }
+
+  .file-item::before {
+    content: attr(data-title);
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 4px;
+  }
+
+  .file-item a {
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+
+  .file-item a:hover {
+    color: #0056b3;
+  }
+}
+
+
+</style>
 <main class="file-area">
   <div class="toolbar">
       <button id="gridViewBtn" class="toolbar-button">Visualizzazione a griglia</button>

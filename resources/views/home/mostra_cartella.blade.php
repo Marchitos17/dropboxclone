@@ -74,7 +74,9 @@
       </div>
       @endforeach
   </div>
-
+  @if($files->isEmpty())
+  <p>Nessun risultato trovato per "{{ request('query') }}"</p>
+@else
 
   <div id="fileList" class="file-list">
       <div class="file-list-header">
@@ -121,6 +123,7 @@
         </div>
       </a>
       @endforeach
+      @endif
   </div>
 </main>
 

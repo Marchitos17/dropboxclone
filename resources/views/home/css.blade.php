@@ -169,7 +169,48 @@
         .file-icon {
             font-size: 50px; /* Icone di dimensione più grande */
         }
+        /*Messaggi*/
+        .rename-form {
+            display: flex;
+            align-items: center;
+        }
 
+        .rename-form input {
+            padding: 5px;
+            margin-right: 10px;
+            font-size: 14px;
+            width: 150px;
+        }
+
+        .rename-form button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .rename-form button:hover {
+            background-color: #218838;
+        }
+        #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background-color: #f3f3f3;
+        z-index: 9999;
+        }
+        
+        /* Barra di progressione */
+        #progress-bar {
+        width: 0%;
+        height: 100%;
+        background-color: #000080;
+        }
         /* Stile della lista */
         .file-list {
             display: none; /* Inizialmente nascosta */

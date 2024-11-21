@@ -13,6 +13,9 @@ Route::get('/delete/{id}', [FolderController::class, 'cancella_cartella'])->name
 Route::get('/delete/{id}/ph', [FolderController::class, 'elimina_immagine'])->name('elimina_immagine');
 Route::post('/insert/file', [FolderController::class, 'inserisci_file'])->name('inserisci_file');
 Route::post('/insert', [FolderController::class, 'inserisci_singolo_file'])->name('inserisci_singolo_file');
+Route::post('/update-folder-name', [FolderController::class, 'updateFolderName'])->name('update.folder.name');
+Route::get('/search', [FolderController::class, 'search'])->name('file.search');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,5 +24,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
+//IMPORTANTE, non funziona il tasto cerca
 //dashboard utente e sistema il tasto condivi, in quanto si vede uguale al mio drive 1^ sezione

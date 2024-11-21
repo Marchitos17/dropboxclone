@@ -1,4 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+
 <script>
     // Funzioni per cambiare la visualizzazione
     const gridViewBtn = document.getElementById('gridViewBtn');
@@ -19,10 +22,26 @@
     // Imposta la visualizzazione iniziale
     fileList.style.display = 'none'; // Inizialmente mostra la griglia
 </script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
-
+<script>
+    let progress = 0;
+    const progressBar = document.getElementById('progress-bar');
+  
+    function simulateProgress() {
+      if (progress < 100) {
+        progress += 1; // Incremento del progresso
+        progressBar.style.width = progress + '%'; // Aggiorna la larghezza della barra
+      } else {
+        // Dopo che il caricamento è completo, nascondi il loader
+        document.getElementById('loader').style.display = 'none'; 
+      }
+    }
+  
+    // Simula il caricamento per 3 secondi
+    setInterval(simulateProgress, 10); // Velocità barra
+    window.addEventListener("load", function () {
+      console.log('Pagina caricata.');
+    });
+  </script>
 <script>
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('fileElem');

@@ -13,8 +13,8 @@
 }
 
 .file-list-header {
-  background-color: #007bff;
-  color: white;
+  background-color: #f5f5f5;
+  color: #555;
   padding: 12px;
   font-size: 16px;
   font-weight: bold;
@@ -104,8 +104,6 @@
     color: #0056b3;
   }
 }
-
-
 </style>
 <main class="file-area">
   <div class="toolbar">
@@ -120,6 +118,14 @@
             <div class="file-icon"><img src="https://img.freepik.com/premium-psd/3d-file-folder-check-verify-icon-illustration_148391-981.jpg" alt=""></div>
             <div class="mt-2">Ordine: {{ $folder->name }}</div>
           </a>
+          <div class="file-item" data-title="Rinomina">
+            <form action="{{ route('update.folder.name') }}" method="POST" class="rename-form">
+                @csrf
+                <input type="hidden" name="folder_id" value="{{ $folder->id }}">
+                <input type="text" name="new_name" value="{{ $folder->name }}" required>
+                <button type="submit">✏️ Rinomina</button>
+            </form>
+        </div>
         </div>
       @endforeach
 

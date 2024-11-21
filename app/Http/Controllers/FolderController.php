@@ -130,4 +130,33 @@ public function inserisci_singolo_file(Request $request)
     return redirect()->back();
     }
 
+    public function updateFolderName(Request $request)
+    {
+        // Trova la cartella nel database
+        $folder = Folder::find($request->folder_id);
+        
+        // Verifica che la cartella esista
+        if ($folder) {
+            // Aggiorna il nome della cartella
+            $folder->name = $request->new_name;
+            $folder->save();
+
+            // Ritorna alla pagina precedente con un messaggio di successo
+            return redirect()->back()->with('success', 'Nome della cartella aggiornato con successo!');
+        }
+
+        // Se la cartella non esiste, mostra un errore
+        return redirect()->back()->with('error', 'Errore nell\'aggiornare il nome della cartella.');
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // Filtrare i file o cartelle in base alla query di ricerca
+        $files = File::where('name', 'like', '%' . $query . '%')->get();
+        
+        return view('home.main', compact('files', 'query'));
+    }
+
+
 }

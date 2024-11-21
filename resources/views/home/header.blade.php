@@ -14,8 +14,11 @@
     <h1><a href="{{route('home')}}">Il mio Drive</a></h1>
   </div>
   <div class="header-center">
-      <input type="text" placeholder="Cerca nel Drive" class="search-bar">
-  </div>
+    <form action="{{ route('file.search') }}" method="GET">
+      <input type="text" name="query" placeholder="Cerca nel Drive" class="search-bar" value="{{ request('query') }}">
+  </form>
+  
+</div>
   <div class="header-right dropdown">
       <!--<button class="icon-button"></button>
       <button class="icon-button"></button>

@@ -74,7 +74,7 @@
       </div>
       @endforeach
   </div>
-  @if($files->isEmpty())
+  @if($folder->files->isEmpty())
   <p>Nessun risultato trovato per "{{ request('query') }}"</p>
 @else
 

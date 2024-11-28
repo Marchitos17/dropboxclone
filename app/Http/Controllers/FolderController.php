@@ -150,13 +150,25 @@ public function inserisci_singolo_file(Request $request)
     }
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        
-        // Filtrare i file o cartelle in base alla query di ricerca
-        $files = File::where('name', 'like', '%' . $query . '%')->get();
-        
-        return view('home.main', compact('files', 'query'));
+        $query = $request->input('query'); // Recupera il valore inserito nella barra di ricerca
+
+        // Cerca nei file
+        $fileResults = File::where('name', 'like', '%' . $query . '%')->get();
+
+        // Cerca nelle cartelle
+        $folderResults = Folder::where('name', 'like', '%' . $query . '%')->get();
+
+        // Combina i risultati
+        $results = $fileResults->merge($folderResults);
+
+        // Passa i risultati e la query alla vista
+        return view('home.search_results', [
+            'results' => $results,
+            'query' => $query,
+        ]);
     }
+
+
 
 
 }

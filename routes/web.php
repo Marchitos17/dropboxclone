@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FolderController;
-
+require __DIR__.'/auth.php';
 Route::get('/', [FolderController::class, 'home'])->name('home');
 
 Route::post('/create', [FolderController::class, 'createFolder'])->name('create.folder');
@@ -17,12 +17,7 @@ Route::post('/update-folder-name', [FolderController::class, 'updateFolderName']
 Route::get('/search', [FolderController::class, 'search'])->name('file.search');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-require __DIR__.'/auth.php';
+
 //IMPORTANTE, non funziona il tasto cerca
 //dashboard utente e sistema il tasto condivi, in quanto si vede uguale al mio drive 1^ sezione
